@@ -14,5 +14,5 @@ RUN npm install -g --unsafe-perm node-red
 EXPOSE 1880
 
 # Start Node-RED
-CMD ["node-red", "--userDir", "/root/.node-red"]
+CMD ["npx", "node-red", "--settings", "/data/settings.js", "/data/flows.json"]
 
