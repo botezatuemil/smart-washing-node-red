@@ -1,18 +1,16 @@
-# Use Node.js LTS version as the base image
-FROM node:14
+# Use the official Node-RED image as a base
+FROM nodered/node-red:latest
 
-# Set work directory
+# Change the working directory in the Docker image to where Node-RED expects to find the flows
 WORKDIR /usr/src/node-red
 
-# Copy local Node-RED data into image
-COPY . /root/.node-red
+# Copy your Node-RED project files into the Docker image
+COPY . .
 
-# Install Node-RED
-RUN npm install -g --unsafe-perm node-red
+# Run npm install to fetch the project dependencies
+RUN npm install
 
-# Expose port
-EXPOSE 1880
+# Run Node-RED
+CMD ["npm", "start"]
 
-# Start Node-RED
-CMD ["npx", "node-red", "--settings", "/data/settings.js", "/data/flows.json"]
 
