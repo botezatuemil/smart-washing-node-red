@@ -1,16 +1,25 @@
-# Use the official Node-RED image as a base
 FROM nodered/node-red:latest
 
-# Change the working directory in the Docker image to where Node-RED expects to find the flows
-WORKDIR /usr/src/node-red
+# Change to root user for installing packages
+USER root
 
-# Copy your Node-RED project files into the Docker image
-COPY . .
-
-# Run npm install to fetch the project dependencies
+# Copy package.json to the WORKDIR so npm install can access it
+COPY package.json .
 RUN npm install
 
-# Run Node-RED
+# Change user back to node-red
+USER node-red
+
+# Copy settings.js to the WORKDIR so node-red can access it
+COPY settings.js .
+
+# Copy flows.json to the WORKDIR so node-red can access it
+COPY flows.json .
+
+# Copy the rest of the project
+COPY . .
+
 CMD ["npm", "start"]
+
 
 
