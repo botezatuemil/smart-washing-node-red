@@ -1,25 +1,28 @@
-FROM nodered/node-red:latest
+# Use Node.js LTS version as the base image
+FROM node:14
 
-# Change to root user for installing packages
-USER root
+# Set work directory
+WORKDIR /usr/src/node-red
 
-# Copy package.json to the WORKDIR so npm install can access it
-COPY package.json .
+# Copy local Node-RED data into image
+COPY . /root/.node-red
+
+# Install Node-RED
+RUN npm install -g --unsafe-perm node-red
+
+# Install local dependencies
+WORKDIR /root/.node-red
 RUN npm install
 
-# Change user back to node-red
-USER node-red
+# Change work directory back
+WORKDIR /usr/src/node-red
 
-# Copy settings.js to the WORKDIR so node-red can access it
-COPY settings.js .
+# Expose port
+EXPOSE 1880
 
-# Copy flows.json to the WORKDIR so node-red can access it
-COPY flows.json .
+# Start Node-RED
+CMD ["node-red", "--userDir", "/root/.node-red"]
 
-# Copy the rest of the project
-COPY . .
-
-CMD ["npm", "start"]
 
 
 
