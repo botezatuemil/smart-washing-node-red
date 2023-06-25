@@ -1,0 +1,176 @@
+[
+    {
+        "id": "e292633c4d67d37a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6deafbdcf71b20d2",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2e92753104d55103",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3239a90f626f480f",
+        "type": "aedes broker",
+        "z": "e292633c4d67d37a",
+        "name": "",
+        "mqtt_port": 1883,
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": "",
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "dburl": "",
+        "usetls": false,
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c4ef8f7bcc1b7f0f",
+        "type": "mqtt out",
+        "z": "e292633c4d67d37a",
+        "name": "",
+        "topic": "cmnd/tasmota_1/STATUS",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "2e92753104d55103",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "fa95ed9287ba91ed",
+        "type": "inject",
+        "z": "e292633c4d67d37a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "8",
+        "payloadType": "str",
+        "x": 230,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24e0100dea80eff9",
+        "type": "mqtt in",
+        "z": "e292633c4d67d37a",
+        "name": "",
+        "topic": "cmnd/tasmota_1/POWER",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6deafbdcf71b20d2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3016febfbe47ee1b",
+        "type": "inject",
+        "z": "e292633c4d67d37a",
+        "name": "8",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "msg",
+                "v": "30",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "8",
+        "payloadType": "str",
+        "x": 270,
+        "y": 400,
+        "wires": [
+            [
+                "c4ef8f7bcc1b7f0f"
+            ]
+        ]
+    }
+]
