@@ -1,19 +1,18 @@
-# Use the official Node.js 12 image.
-# https://hub.docker.com/_/node
-FROM node:12
+# Use Node.js LTS version as the base image
+FROM node:14
 
-# Create and change to the app directory.
-WORKDIR /usr/src/app
+# Set work directory
+WORKDIR /usr/src/node-red
 
-# Copy application dependency manifests to the container image.
-# Copying this first prevents re-running npm install on every code change.
-COPY package*.json ./
+# Copy local Node-RED data into image
+COPY . /root/.node-red
 
-# Install production dependencies.
-RUN npm install --only=production
+# Install Node-RED
+RUN npm install -g --unsafe-perm node-red
 
-# Copy local code to the container image.
-COPY . .
+# Expose port
+EXPOSE 1880
 
 # Start Node-RED
-CMD [ "./node-red" ]
+CMD ["node-red", "--userDir", "/root/.node-red"]
+
